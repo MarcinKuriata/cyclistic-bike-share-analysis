@@ -36,3 +36,18 @@ Analyze historical bike trip data to identify behavioral patterns and difference
 * [ ] Exploratory analysis and statistical summary (Analyze)
 * [ ] Supporting interactive visualizations and dashboards (Share)
 * [ ] Top three actionable business recommendations (Act)
+
+## 2. Prepare Phase (Data Sourcing & Integrity)
+
+### Data Source & Storage
+* **Source:** Historical trip data provided by Motivate International Inc. under an open data license.
+* **Scope:** 12 months of historical trip records in `.csv` format.
+* **Privacy:** Personally Identifiable Information (PII) is excluded to comply with data privacy regulations (no credit card or address tracking).
+* **Storage:** datasets are stored in a private Google Drive. 
+
+### ROCCC Data Quality Framework
+* **Reliable:** High integrity, direct internal tracking logs from bike IoT sensors.
+* **Original:** First-party system logs from Motivate International Inc.
+* **Comprehensive:** Contains comprehensive trip metrics (start/end timestamp, station names, rideable type, user type).
+* **Current:** Covers the latest available 12-month operating window (year 2019).
+* **Cited:** Publicly accessible and licensed dataset.
