@@ -60,8 +60,20 @@ Analyze historical bike trip data to identify behavioral patterns and difference
 * **Consolidation:** Concatenated the 4 datasets into a single master file containing **3,818,004 records** and exported it as `divvy_trips_2019_raw.csv`.
 * **Jupyter Notebook:** Documented in [`01_cyclistic_exploratory_analysis.ipynb`](./01_cyclistic_exploratory_analysis.ipynb).
 
-### Step 2: ELT Pipeline Decision (Google BigQuery / SQL)
-To demonstrate production-grade data warehousing practices, full transformation and data hygiene were delegated to **Google BigQuery (SQL)**:
-* **Data Type Casting:** Converting string timestamps (`start_time`, `end_time`) to `TIMESTAMP` and `tripduration` to numeric format.
-* **Data Cleaning & Filtering:** Removing trip anomalies (negative durations, test/servicing trips, trips under 60 seconds).
-* **Feature Engineering:** Calculating trip length in minutes, day of the week, and hour of the day for behavioral analysis.
+### Step 2: Data Cleaning & Transformation Pipeline (Google BigQuery / SQL)
+After consolidating the raw quarterly files, the dataset was ingested into Google BigQuery using an **ELT (Extract, Load, Transform)** architecture:
+
+1. **Staging Layer & Data Profiling:**
+   * Materialized raw data into a native BigQuery staging table (`cyclistic_2019_stage1`) containing **3,818,004 records**.
+   * Profiled trip duration metrics and identified extreme anomalies (e.g., maximum trip duration of **123.01 days / 177,140 minutes**).
+   * Quantified extreme outliers exceeding 24 hours: **1,848 records** (1,347 Casual, 501 Subscriber) representing unreturned, lost, or stolen bikes.
+
+2. **Production Cleaning & Feature Engineering (`cyclistic_2019_cleaned`):**
+   * **Outlier Removal:** Filtered out trips $< 60$ seconds and $> 24$ hours, resulting in **3,816,156 clean records** (99.95% data retention).
+   * **Unit Conversion:** Calculated `trip_duration_minutes` rounded to 2 decimal places, bringing the realistic average duration down to **19.03 minutes**.
+   * **Time Dimensions Extracted:**
+     * `day_of_week` & `day_name` (Monday–Sunday) for weekly commuting patterns.
+     * `month_num` & `month_name` (January–December) for seasonal demand analysis.
+     * `start_hour` (0–23) for peak-hour and diurnal usage trends.
+
+* **Full Documented SQL Script:** [`02_data_cleaning_and_transformation.sql`](./02_data_cleaning_and_transformation.sql)
