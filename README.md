@@ -51,3 +51,17 @@ Analyze historical bike trip data to identify behavioral patterns and difference
 * **Comprehensive:** Contains comprehensive trip metrics (start/end timestamp, station names, rideable type, user type).
 * **Current:** Covers the latest available 12-month operating window (year 2019).
 * **Cited:** Publicly accessible and licensed dataset.
+
+## 3. Process Phase (Data Consolidation & Cleaning Architecture)
+
+### Step 1: Initial Ingestion & Schema Alignment (Python / Pandas)
+* **Exploratory Data Inspection:** Inspected all 4 quarterly datasets for 2019 to identify schema mismatches and data types.
+* **Schema Standardization:** Remapped non-standard column headers in the `Q2` dataset to align seamlessly with `Q1`, `Q3`, and `Q4`.
+* **Consolidation:** Concatenated the 4 datasets into a single master file containing **3,818,004 records** and exported it as `divvy_trips_2019_raw.csv`.
+* **Jupyter Notebook:** Documented in [`01_cyclistic_exploratory_analysis.ipynb`](./01_cyclistic_exploratory_analysis.ipynb).
+
+### Step 2: ELT Pipeline Decision (Google BigQuery / SQL)
+To demonstrate production-grade data warehousing practices, full transformation and data hygiene were delegated to **Google BigQuery (SQL)**:
+* **Data Type Casting:** Converting string timestamps (`start_time`, `end_time`) to `TIMESTAMP` and `tripduration` to numeric format.
+* **Data Cleaning & Filtering:** Removing trip anomalies (negative durations, test/servicing trips, trips under 60 seconds).
+* **Feature Engineering:** Calculating trip length in minutes, day of the week, and hour of the day for behavioral analysis.
