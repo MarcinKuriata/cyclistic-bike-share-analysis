@@ -111,5 +111,13 @@ I conducted an in-depth exploratory analysis in Google BigQuery to uncover behav
 2. **Geographic Distribution:**
    * Casual riders originate overwhelmingly near shoreline paths and park attractions (*Streeter Dr & Grand Ave*, *Lake Shore Dr*, *Millennium Park*).
    * Subscribers consistently start trips around major commuter train stations (*Canal St & Adams St*, *Clinton St & Madison St*).
+  
+## 5. Share Phase (Data Visualizations & Dashboard)
+*(In Progress / Next Step)*
+
+---
+
+## 6. Act Phase (Business Recommendations)
+*(In Progress / Next Step)*
 
 * **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
