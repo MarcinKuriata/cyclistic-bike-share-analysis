@@ -1,6 +1,14 @@
 # Cyclistic Bike-Share Case Study
 Google Data Analytics Capstone Case Study — Analyzing rider trends using SQL, BigQuery, Python, and Tableau to drive annual memberships.
 
+## Table of Contents
+* [1. Ask Phase (Project Overview & Business Task)](#1-project-overview--business-task)
+* [2. Prepare Phase (Data Sources & Tools)](#2-prepare-phase)
+* [3. Process Phase (Data Cleaning & Pipeline)](#3-process-phase)
+* [4. Analyze Phase (Exploratory Data Analysis)](#4-analyze-phase)
+* [5. Share Phase (Data Visualizations & Dashboard)](#5-share-phase)
+* [6. Act Phase (Business Recommendations)](#6-act-phase)
+
 ## 1. Ask Phase (Business Task & Context)
 
 ### Business Background
@@ -77,3 +85,31 @@ After consolidating the raw quarterly files, the dataset was ingested into Googl
      * `start_hour` (0–23) for peak-hour and diurnal usage trends.
 
 * **Full Documented SQL Script:** [`02_data_cleaning_and_transformation.sql`](./02_data_cleaning_and_transformation.sql)
+
+## 4. Analyze Phase: Exploratory Data Analysis (EDA)
+
+I conducted an in-depth exploratory analysis in Google BigQuery to uncover behavioral differences between **Subscribers (Annual Members)** and **Customers (Casual Riders)** across volume, duration, seasonality, and geography.
+
+### Summary Comparison Table
+| Metric / Dimension | Casual Customers | Annual Subscribers | Key Behavioral Difference |
+| :--- | :--- | :--- | :--- |
+| **Total Rides** | 879,290 (23.0%) | 2,936,866 (77.0%) | Subscribers generate >3x more total trips |
+| **Avg. Trip Duration** | **39.4 minutes** | **12.9 minutes** | Customers ride **3x longer** per trip |
+| **Peak Days** | **Saturday & Sunday** (~43% of trips) | **Tuesday – Thursday** (~500k trips/day) | Leisure on weekends vs. weekday utility |
+| **Peak Hours** | Afternoon peak (3:00 PM – 5:00 PM) | Commuting peaks (**8:00 AM & 5:00 PM**) | Daytime recreation vs. work commute |
+| **Seasonality** | Extreme summer peak (Aug: 186k vs Jan: 4.5k) | High year-round baseline (Jan: 98k) | Weather-dependent vs. all-season transport |
+| **Top Station Types** | Waterfront, parks & attractions | Transit hubs & downtown intersections | Tourism/leisure hubs vs. railway terminals |
+
+---
+
+### Core Business Insights
+
+1. **User Purpose & Persona:**
+   * **Subscribers:** Use Cyclistic as a daily functional transit method to commute to work. Rides are short (~13 min), frequent on weekdays, and peak precisely at standard office commute hours (8:00 AM and 5:00 PM).
+   * **Casual Customers:** Use bikes for leisure, sightseeing, and exercise. Rides are substantially longer (~40 min), highly concentrated on weekends, and surge during the warm summer months (June–August).
+
+2. **Geographic Distribution:**
+   * Casual riders originate overwhelmingly near shoreline paths and park attractions (*Streeter Dr & Grand Ave*, *Lake Shore Dr*, *Millennium Park*).
+   * Subscribers consistently start trips around major commuter train stations (*Canal St & Adams St*, *Clinton St & Madison St*).
+
+* 📄 **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
