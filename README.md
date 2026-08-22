@@ -2,12 +2,12 @@
 Google Data Analytics Capstone Case Study — Analyzing rider trends using SQL, BigQuery, Python, and Tableau to drive annual memberships.
 
 ## Table of Contents
-* [1. Ask Phase (Project Overview & Business Task)](#1-project-overview--business-task)
-* [2. Prepare Phase (Data Sources & Tools)](#2-prepare-phase)
-* [3. Process Phase (Data Cleaning & Pipeline)](#3-process-phase)
-* [4. Analyze Phase (Exploratory Data Analysis)](#4-analyze-phase)
-* [5. Share Phase (Data Visualizations & Dashboard)](#5-share-phase)
-* [6. Act Phase (Business Recommendations)](#6-act-phase)
+* [1. Ask Phase (Business Task & Context)](#1-ask-phase-business-task--context)
+* [2. Prepare Phase (Data Sourcing & Integrity)](#2-prepare-phase-data-sourcing--integrity)
+* [3. Process Phase (Data Consolidation & Cleaning Architecture)](#3-process-phase-data-consolidation--cleaning-architecture)
+* [4. Analyze Phase (Exploratory Data Analysis)](#4-analyze-phase-exploratory-data-analysis)
+* [5. Share Phase (Data Visualizations & Dashboard)](#5-share-phase-data-visualizations--dashboard)
+* [6. Act Phase (Business Recommendations)](#6-act-phase-business-recommendations)
 
 ## 1. Ask Phase (Business Task & Context)
 
@@ -112,4 +112,4 @@ I conducted an in-depth exploratory analysis in Google BigQuery to uncover behav
    * Casual riders originate overwhelmingly near shoreline paths and park attractions (*Streeter Dr & Grand Ave*, *Lake Shore Dr*, *Millennium Park*).
    * Subscribers consistently start trips around major commuter train stations (*Canal St & Adams St*, *Clinton St & Madison St*).
 
-* 📄 **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
+* **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
