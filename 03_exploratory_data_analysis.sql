@@ -35,109 +35,154 @@ Query Output:
 Insights:
 - Subscribers make up ~77% of all trips (core user base).
 - Casual Customers ride on average for 39.43 minutes — more than 3x longer than Subscribers (12.93 minutes).
-- Subscribers use bikes for quick, utility/commuting trips, while Customers use them for leisure/extended rides.
+- Subscribers use bikes mainly for daily commutes to work — short trips (~13 mins).
 */
 
 
 -- ============================================================================
--- ANALYSIS 2: DAY OF WEEK BEHAVIORAL PATTERNS
--- Purpose: Analyze ride volume and average duration per day of the week by user type.
+-- ANALYSIS 2: DAY OF WEEK BEHAVIORAL PATTERNS 
+-- Purpose: Compare ride volume and average duration across days of the week.
 -- ============================================================================
 SELECT 
-    usertype,
-    day_name,
     day_of_week,
-    COUNT(*) AS total_rides,
-    ROUND(AVG(trip_duration_minutes), 2) AS avg_duration_minutes
+    day_name,
+    -- Ride Counts
+    COUNTIF(usertype = 'Customer') AS customer_rides,
+    COUNTIF(usertype = 'Subscriber') AS subscriber_rides,
+    -- Average Durations (minutes)
+    ROUND(AVG(CASE WHEN usertype = 'Customer' THEN trip_duration_minutes END), 2) AS customer_avg_duration,
+    ROUND(AVG(CASE WHEN usertype = 'Subscriber' THEN trip_duration_minutes END), 2) AS subscriber_avg_duration
 FROM 
     `cyclisticcapstone-506211.cyclistic_data.cyclistic_2019_cleaned`
 GROUP BY 
-    usertype, 
-    day_name, 
-    day_of_week
+    day_of_week, 
+    day_name
 ORDER BY 
-    usertype, 
     day_of_week;
 
 /*
 Query Output:
-+------------+-----------+-------------+-------------+----------------------+
-| usertype   | day_name  | day_of_week | total_rides | avg_duration_minutes |
-+------------+-----------+-------------+-------------+----------------------+
-| Customer   | Sunday    | 1           | 169,941     | 41.33                |
-| Customer   | Monday    | 2           | 101,356     | 39.30                |
-| Customer   | Tuesday   | 3           | 88,415      | 37.57                |
-| Customer   | Wednesday | 4           | 89,601      | 36.68                |
-| Customer   | Thursday  | 5           | 101,203     | 37.39                |
-| Customer   | Friday    | 6           | 120,934     | 38.31                |
-| Customer   | Saturday  | 7           | 207,760     | 41.55                |
-| Subscriber | Sunday    | 1           | 256,191     | 14.22                |
-| Subscriber | Monday    | 2           | 458,714     | 12.64                |
-| Subscriber | Tuesday   | 3           | 496,951     | 12.58                |
-| Subscriber | Wednesday | 4           | 494,205     | 12.62                |
-| Subscriber | Thursday  | 5           | 486,837     | 12.64                |
-| Subscriber | Friday    | 6           | 456,890     | 12.54                |
-| Subscriber | Saturday  | 7           | 287,078     | 14.46                |
-+------------+-----------+-------------+-------------+----------------------+
++-------------+-----------+----------------+------------------+-----------------------+-------------------------+
+| day_of_week | day_name  | customer_rides | subscriber_rides | customer_avg_duration | subscriber_avg_duration |
++-------------+-----------+----------------+------------------+-----------------------+-------------------------+
+| 1           | Sunday    | 169,941        | 256,191          | 41.33                 | 14.22                   |
+| 2           | Monday    | 101,356        | 458,714          | 39.30                 | 12.64                   |
+| 3           | Tuesday   | 88,415         | 496,951          | 37.57                 | 12.58                   |
+| 4           | Wednesday | 89,601         | 494,205          | 36.68                 | 12.62                   |
+| 5           | Thursday  | 101,203        | 486,837          | 37.39                 | 12.64                   |
+| 6           | Friday    | 120,934        | 456,890          | 38.31                 | 12.54                   |
+| 7           | Saturday  | 207,760        | 287,078          | 41.55                 | 14.46                   |
++-------------+-----------+----------------+------------------+-----------------------+-------------------------+
 Insights:
-- Customer demand peaks strongly on weekends (Saturday: 207k, Sunday: 170k).
-- Subscriber demand is concentrated heavily on weekdays (Tuesday-Thursday peaks ~497k/day) and drops by ~45% on weekends.
+- Customer rides peak sharply on weekends (Saturday & Sunday account for ~43% of all casual trips).
+- Subscriber rides peak during workdays (Tuesday through Thursday at nearly 500k rides/day) and decline on weekends.
+- Customer ride durations stay around 37-41 minutes across all days, while Subscribers maintain short 12-14 minute rides.
 */
 
 
 -- ============================================================================
--- ANALYSIS 3: HOURLY USAGE & COMMUTE PEAKS
--- Purpose: Identify hourly distribution and peak commuting windows (0-23h).
+-- ANALYSIS 3: HOURLY USAGE & COMMUTE PEAKS 
+-- Purpose: Compare hourly ride volume and average duration for both user types.
 -- ============================================================================
 SELECT 
-    usertype,
     start_hour,
-    COUNT(*) AS total_rides,
-    ROUND(AVG(trip_duration_minutes), 2) AS avg_duration_minutes
+    -- Ride Counts
+    COUNTIF(usertype = 'Customer') AS customer_rides,
+    COUNTIF(usertype = 'Subscriber') AS subscriber_rides,
+    -- Average Durations (minutes)
+    ROUND(AVG(CASE WHEN usertype = 'Customer' THEN trip_duration_minutes END), 2) AS customer_avg_duration,
+    ROUND(AVG(CASE WHEN usertype = 'Subscriber' THEN trip_duration_minutes END), 2) AS subscriber_avg_duration
 FROM 
     `cyclisticcapstone-506211.cyclistic_data.cyclistic_2019_cleaned`
 GROUP BY 
-    usertype, 
     start_hour
 ORDER BY 
-    usertype, 
     start_hour;
 
 /*
-Key Summary of Hourly Trends:
-- Subscribers show a distinct bimodal commuting pattern:
-  * Morning peak: 08:00 (283,941 rides)
-  * Evening peak: 17:00 (390,619 rides)
-- Customers exhibit a unimodal afternoon curve:
-  * Steady climb from 10:00 to 17:00 (peaking at 17:00 with 84,343 rides).
+Query Output:
++------------+----------------+------------------+-----------------------+-------------------------+
+| start_hour | customer_rides | subscriber_rides | customer_avg_duration | subscriber_avg_duration |
++------------+----------------+------------------+-----------------------+-------------------------+
+| 0          | 8,179          | 15,867           | 39.21                 | 13.80                   |
+| 1          | 5,355          | 9,029            | 40.20                 | 13.59                   |
+| 2          | 3,313          | 5,326            | 40.07                 | 13.49                   |
+| 3          | 1,908          | 3,680            | 41.93                 | 12.85                   |
+| 4          | 1,167          | 6,614            | 38.87                 | 11.06                   |
+| 5          | 2,606          | 33,151           | 32.63                 | 10.85                   |
+| 6          | 6,077          | 102,130          | 28.77                 | 11.50                   |
+| 7          | 12,853         | 224,826          | 27.92                 | 11.76                   |
+| 8          | 21,770         | 283,941          | 32.68                 | 11.96                   |
+| 9          | 28,655         | 135,109          | 43.00                 | 12.00                   |
+| 10         | 44,712         | 100,686          | 46.29                 | 12.70                   |
+| 11         | 59,969         | 119,915          | 45.72                 | 12.79                   |
+| 12         | 69,517         | 136,645          | 43.43                 | 12.73                   |
+| 13         | 75,084         | 131,920          | 42.99                 | 12.91                   |
+| 14         | 78,358         | 127,892          | 42.37                 | 13.35                   |
+| 15         | 80,001         | 163,317          | 40.73                 | 13.25                   |
+| 16         | 82,751         | 292,860          | 37.85                 | 13.13                   |
+| 17         | 84,343         | 390,619          | 35.24                 | 13.75                   |
+| 18         | 67,928         | 247,176          | 35.61                 | 13.63                   |
+| 19         | 50,295         | 158,353          | 35.82                 | 13.65                   |
+| 20         | 34,331         | 99,735           | 35.40                 | 13.61                   |
+| 21         | 24,876         | 71,245           | 35.12                 | 13.66                   |
+| 22         | 21,120         | 48,522           | 35.36                 | 13.32                   |
+| 23         | 14,122         | 28,308           | 36.32                 | 13.67                   |
++------------+----------------+------------------+-----------------------+-------------------------+
+Insights:
+- Subscribers show two clear rush hour spikes:
+  * Morning peak: 8:00 AM (283k rides)
+  * Afternoon peak: 5:00 PM (390k rides)
+  This clearly confirms they use the bikes to commute to and from work.
+- Customers build up activity gradually throughout the day:
+  * Rides start picking up around 11:00 AM and peak late afternoon (3:00 PM - 5:00 PM).
+  * Trip duration remains high (35-46 mins) all day, pointing to casual daytime leisure.
 */
 
 
 -- ============================================================================
--- ANALYSIS 4: MONTHLY & SEASONAL DISTRIBUTION
--- Purpose: Track ride volume throughout the year (Jan-Dec) to identify seasonal shifts.
+-- ANALYSIS 4: MONTHLY & SEASONAL DISTRIBUTION 
+-- Purpose: Track ride volume and average duration across months (Jan-Dec).
 -- ============================================================================
 SELECT 
-    usertype,
     month_num,
     month_name,
-    COUNT(*) AS total_rides,
-    ROUND(AVG(trip_duration_minutes), 2) AS avg_duration_minutes
+    -- Ride Counts
+    COUNTIF(usertype = 'Customer') AS customer_rides,
+    COUNTIF(usertype = 'Subscriber') AS subscriber_rides,
+    -- Average Durations (minutes)
+    ROUND(AVG(CASE WHEN usertype = 'Customer' THEN trip_duration_minutes END), 2) AS customer_avg_duration,
+    ROUND(AVG(CASE WHEN usertype = 'Subscriber' THEN trip_duration_minutes END), 2) AS subscriber_avg_duration
 FROM 
     `cyclisticcapstone-506211.cyclistic_data.cyclistic_2019_cleaned`
 GROUP BY 
-    usertype, 
     month_num, 
     month_name
 ORDER BY 
-    usertype, 
     month_num;
 
 /*
-Key Summary of Seasonality:
-- Both segments peak during summer (June-August).
-- Customers are highly weather-dependent: August has 186k rides vs January with only 4.5k rides (~40x difference).
-- Subscribers maintain a much higher baseline even in winter (January: 98.6k, February: 93.5k).
+Query Output:
++-----------+------------+----------------+------------------+-----------------------+-------------------------+
+| month_num | month_name | customer_rides | subscriber_rides | customer_avg_duration | subscriber_avg_duration |
++-----------+------------+----------------+------------------+-----------------------+-------------------------+
+| 1         | January    | 4,591          | 98,601           | 33.62                 | 11.46                   |
+| 2         | February   | 2,627          | 93,522           | 29.35                 | 11.23                   |
+| 3         | March      | 15,877         | 149,659          | 36.74                 | 11.26                   |
+| 4         | April      | 47,669         | 217,531          | 40.86                 | 12.47                   |
+| 5         | May        | 81,507         | 285,793          | 41.58                 | 13.24                   |
+| 6         | June       | 130,066        | 345,135          | 40.42                 | 14.04                   |
+| 7         | July       | 175,433        | 381,615          | 40.61                 | 14.35                   |
+| 8         | August     | 186,625        | 403,241          | 40.14                 | 13.86                   |
+| 9         | September  | 128,988        | 364,034          | 37.81                 | 13.18                   |
+| 10        | October    | 70,889         | 300,717          | 35.48                 | 11.99                   |
+| 11        | November   | 18,653         | 158,401          | 34.31                 | 11.09                   |
+| 12        | December   | 16,365         | 138,647          | 37.17                 | 11.04                   |
++-----------+------------+----------------+------------------+-----------------------+-------------------------+
+Insights:
+- Both groups peak in the summer (June–August), with August being the busiest month overall.
+- Customer demand is heavily weather-dependent: it drops drastically in winter (under 5k rides in Jan/Feb) and surges in summer (over 186k in August).
+- Subscribers maintain consistent activity year-round, recording ~90k-100k rides even during the coldest winter months.
 */
 
 
@@ -145,13 +190,16 @@ Key Summary of Seasonality:
 -- ANALYSIS 5: TOP 10 START STATIONS BY USER TYPE
 -- Purpose: Identify primary geographic hotspots for targeted marketing campaigns.
 -- ============================================================================
+
+-- Use a CTE (subquery) to calculate total rides and assign rank positions before filtering the top 5
 WITH RankedStations AS (
     SELECT 
         usertype,
         from_station_name,
         COUNT(*) AS total_rides,
         ROUND(AVG(trip_duration_minutes), 2) AS avg_duration_minutes,
-        DENSE_RANK() OVER (PARTITION BY usertype ORDER BY COUNT(*) DESC) AS station_rank
+        -- Rank stations from most to least popular separately for each user type (resets count for each group)
+        RANK() OVER (PARTITION BY usertype ORDER BY COUNT(*) DESC) AS station_rank
     FROM 
         `cyclisticcapstone-506211.cyclistic_data.cyclistic_2019_cleaned`
     WHERE 
@@ -169,7 +217,7 @@ SELECT
 FROM 
     RankedStations
 WHERE 
-    station_rank <= 10
+    station_rank <= 5
 ORDER BY 
     usertype, 
     station_rank;
@@ -192,6 +240,6 @@ Query Output (Top 5 comparison):
 | Subscriber | 5            | Franklin St & Monroe St            | 30,828      | 13.32                |
 +------------+--------------+------------------------------------+-------------+----------------------+
 Insights:
-- Customers congregate at tourist/waterfront hotspots (Navy Pier / Streeter Dr, Lake Shore Dr, Millennium Park, Shedd Aquarium).
-- Subscribers start trips at major transit hubs and commercial office corridors (Union Station / Canal & Adams, Ogilvie Transportation Center / Clinton & Madison).
+- Top Customer stations are located near parks, attractions, and the waterfront (e.g., Streeter Dr, Millennium Park, Shedd Aquarium).
+- Top Subscriber stations are concentrated around major train stations and busy downtown street intersections (e.g., Canal St, Clinton St).
 */
