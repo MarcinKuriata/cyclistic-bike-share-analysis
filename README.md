@@ -115,7 +115,7 @@ I conducted an in-depth exploratory analysis in Google BigQuery to uncover behav
 ## 5. Share Phase (Data Visualizations & Dashboard)
 An interactive executive dashboard was designed in **Tableau Public** to summarize behavioral trends across trip volume, commute hours, day-of-week demand, and monthly seasonality.
 
-[![Cyclistic Dashboard](./cyclisticdashboard.png)](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
+[![Cyclistic Dashboard](./cyclistic_tableau_dashboard.png)](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
 * Click the image above to explore the live interactive dashboard on Tableau Public.*
 
 * **Direct Link:** [View Dashboard on Tableau Public](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
