@@ -138,19 +138,4 @@ Here are three simple and practical recommendations for Lily Moreno to convert c
 
 ### 3. Run Summer Promotions (May – August)
 * **Why:** Casual riding drops almost to zero in winter and explodes in the summer (over 186k rides in August vs. under 5k in January/February).
-* **Action:** Focus the marketing budget and social media campaigns on late spring and summer (May–August), when casual riders are actually active and paying attention.## 6. Act Phase (Business Recommendations)
-
-Based on the behavioral differences identified between casual riders and annual members, here are three targeted, data-backed recommendations for Lily Moreno (Director of Marketing):
-
-### 1. Introduce a "Weekend Pass" with Conversion Credits
-* **Insight:** Casual customers ride predominantly on weekends (~43% of trips) and take longer leisure rides (~40 mins). A full-price annual membership may feel too rigid or commuting-focused for them.
-* **Action:** Launch a seasonal **Weekend Membership / Leisure Pass** that charges a lower recurring fee for weekend access. Include a feature where all weekend ride fees can be applied as a discount toward a full Annual Membership within 30 days.
-
-### 2. High-Impact Geotargeted Campaigns at Waterfront & Park Stations
-* **Insight:** Casual riders start trips overwhelmingly around recreation and tourist spots (*Streeter Dr & Grand Ave*, *Millennium Park*, *Lake Shore Dr*, *Shedd Aquarium*).
-* **Action:** Run localized in-app promotions, QR code dock banners, and digital out-of-home (DOOH) ads specifically at the top 10 waterfront stations. The messaging should highlight the savings of an annual membership for recurring weekend trips.
-
-### 3. Summer Launch & Early-Bird Seasonal Campaigns (May – August)
-* **Insight:** Over 68% of all casual rider volume happens between May and September, peaking in August (186k rides vs. under 5k in winter).
-* **Action:** Schedule primary digital marketing spend and promotional push between late spring and mid-summer. Run an "Early Bird Summer Membership" campaign in May, offering discounted first-month pricing or digital rewards before peak riding season begins.
-* **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
+* **Action:** Focus the marketing budget and social media campaigns on late spring and summer (May–August), when casual riders are actually active and paying attention.
