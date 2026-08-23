@@ -113,11 +113,28 @@ I conducted an in-depth exploratory analysis in Google BigQuery to uncover behav
    * Subscribers consistently start trips around major commuter train stations (*Canal St & Adams St*, *Clinton St & Madison St*).
   
 ## 5. Share Phase (Data Visualizations & Dashboard)
-*(In Progress / Next Step)*
+An interactive executive dashboard was designed in **Tableau Public** to summarize behavioral trends across trip volume, commute hours, day-of-week demand, and monthly seasonality.
+
+[![Cyclistic Dashboard](./cyclistic_tableau_dashboard.png)](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
+* Click the image above to explore the live interactive dashboard on Tableau Public.*
+
+* **Direct Link:** [View Dashboard on Tableau Public](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
 
 ---
 
 ## 6. Act Phase (Business Recommendations)
-*(In Progress / Next Step)*
 
+Based on the behavioral differences identified between casual riders and annual members, here are three targeted, data-backed recommendations for Lily Moreno (Director of Marketing):
+
+### 1. Introduce a "Weekend Pass" with Conversion Credits
+* **Insight:** Casual customers ride predominantly on weekends (~43% of trips) and take longer leisure rides (~40 mins). A full-price annual membership may feel too rigid or commuting-focused for them.
+* **Action:** Launch a seasonal **Weekend Membership / Leisure Pass** that charges a lower recurring fee for weekend access. Include a feature where all weekend ride fees can be applied as a discount toward a full Annual Membership within 30 days.
+
+### 2. High-Impact Geotargeted Campaigns at Waterfront & Park Stations
+* **Insight:** Casual riders start trips overwhelmingly around recreation and tourist spots (*Streeter Dr & Grand Ave*, *Millennium Park*, *Lake Shore Dr*, *Shedd Aquarium*).
+* **Action:** Run localized in-app promotions, QR code dock banners, and digital out-of-home (DOOH) ads specifically at the top 10 waterfront stations. The messaging should highlight the savings of an annual membership for recurring weekend trips.
+
+### 3. Summer Launch & Early-Bird Seasonal Campaigns (May – August)
+* **Insight:** Over 68% of all casual rider volume happens between May and September, peaking in August (186k rides vs. under 5k in winter).
+* **Action:** Schedule primary digital marketing spend and promotional push between late spring and mid-summer. Run an "Early Bird Summer Membership" campaign in May, offering discounted first-month pricing or digital rewards before peak riding season begins.
 * **Full EDA SQL Script with query outputs:** [`03_exploratory_data_analysis.sql`](./03_exploratory_data_analysis.sql)
