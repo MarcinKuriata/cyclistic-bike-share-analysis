@@ -115,7 +115,7 @@ I conducted an in-depth exploratory analysis in Google BigQuery to uncover behav
 ## 5. Share Phase (Data Visualizations & Dashboard)
 An interactive executive dashboard was designed in **Tableau Public** to summarize behavioral trends across trip volume, commute hours, day-of-week demand, and monthly seasonality.
 
-[![Cyclistic Dashboard](./cyclistic_tableau_dashboard.png)](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
+[![Cyclistic Dashboard](./cyclistic_dashboard.png)](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
 * Click the image above to explore the live interactive dashboard on Tableau Public.*
 
 * **Direct Link:** [View Dashboard on Tableau Public](https://public.tableau.com/app/profile/marcin.kuriata/viz/CyclisticAnalysisVisualisation/CyclicticDashboard?publish=yes)
@@ -123,6 +123,22 @@ An interactive executive dashboard was designed in **Tableau Public** to summari
 ---
 
 ## 6. Act Phase (Business Recommendations)
+
+Based on the analysis, casual riders and annual members use the bikes for completely different reasons. Casual riders treat them as weekend entertainment, while members use them as daily transport to work. 
+
+Here are three simple and practical recommendations for Lily Moreno to convert casual riders into members:
+
+### 1. Create a Seasonal "Weekend Pass"
+* **Why:** Casual riders use bikes mostly on weekends (~43% of their rides) and take long trips (~40 mins). A full-year membership is unattractive to someone who doesn't commute during the week.
+* **Action:** Offer a cheaper pass covering weekends only, or give casual users a discount on the annual membership based on the money they already spent on weekend single passes.
+
+### 2. Put QR Codes and Ads at Waterfront & Park Stations
+* **Why:** The vast majority of casual rides start near tourist spots and parks (like *Streeter Dr & Grand Ave*, *Lake Shore Dr*, or *Millennium Park*).
+* **Action:** Place physical ads, posters, and simple QR codes directly at these specific stations showing how much cheaper an annual pass is compared to buying multiple single-ride passes.
+
+### 3. Run Summer Promotions (May – August)
+* **Why:** Casual riding drops almost to zero in winter and explodes in the summer (over 186k rides in August vs. under 5k in January/February).
+* **Action:** Focus the marketing budget and social media campaigns on late spring and summer (May–August), when casual riders are actually active and paying attention.## 6. Act Phase (Business Recommendations)
 
 Based on the behavioral differences identified between casual riders and annual members, here are three targeted, data-backed recommendations for Lily Moreno (Director of Marketing):
 
